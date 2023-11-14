@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:07:22 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/14 18:10:31 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/14 18:23:24 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 int	ft_check_arg(va_list args, const char type)
 {
+	int total_len;
+
+	total_len = 0;
 	if (type == 'c')
 		ft_putchar_fd(((char)va_arg(args, int)), FD);
 	else if (type == 's')
@@ -25,14 +28,15 @@ int	ft_check_arg(va_list args, const char type)
 	else if (type == 'd' || type == 'i')
 		ft_putnbr_fd((va_arg(args, int)), FD);
 	else if (type == 'u')
-		ft_putunsigned(va_arg(args, unsigned int));
+		total_len += ft_putunsigned(va_arg(args, unsigned int));
 	else if (type == 'p')
-		ft_putpointer(va_arg(args, unsigned long));
+		total_len += ft_putpointer(va_arg(args, unsigned long));
 	else if (type == 'x')
-		ft_puthex((va_arg(args, unsigned int)), type);
+		total_len += ft_puthex((va_arg(args, unsigned int)), type);
 	else if (type == 'X')
-		ft_puthex((va_arg(args, unsigned int)), type);
-	return (0);
+		total_len += ft_puthex((va_arg(args, unsigned int)), type);
+	printf("\n%d\n", total_len);
+	return (total_len);
 }
 
 int	ft_printf(const	char *format, ...)

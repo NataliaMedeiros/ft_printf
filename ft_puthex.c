@@ -54,7 +54,7 @@ int	ft_puthex(unsigned int n, const char type)
 		}
 		ft_putstr_fd(str_n, FD);
 	}
-	return (len);
+	return (ft_strlen(str_n));
 }
 
 int	ft_putpointer(unsigned long n)
@@ -83,7 +83,7 @@ int	ft_putpointer(unsigned long n)
 		len--;
 	}
 	ft_putstr_fd(str_n, FD);
-	return (len);
+	return (ft_strlen(str_n));
 }
 
 int	ft_putunsigned(unsigned int n)
@@ -111,5 +111,5 @@ int	ft_putunsigned(unsigned int n)
 		}
 		ft_putstr_fd(str_n, FD);
 	}
-	return (len);
+	return (ft_strlen(str_n));
 }
