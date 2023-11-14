@@ -6,7 +6,7 @@
 #    By: natalia <natalia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 11:10:51 by nmedeiro          #+#    #+#              #
-#    Updated: 2023/11/14 13:32:45 by natalia          ###   ########.fr        #
+#    Updated: 2023/11/14 16:35:34 by natalia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libftprintf.a
 LIBFT = libft/libft.a
 
 FILES = ft_printf \
+		ft_puthex \
 
 #Bonus =
 
