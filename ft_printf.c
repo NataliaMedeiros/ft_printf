@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 11:07:22 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/15 08:47:19 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/15 09:40:09 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,11 @@
 int	ft_check_arg(va_list args, const char type)
 {
 	if (type == 'c')
-	{
-		ft_putchar_fd(((char)va_arg(args, int)), FD);
-		return (1);
-	}
+		return (ft_putchar(((char)va_arg(args, int))));
 	else if (type == 's')
-	{
-		char	*str;
-
-		str = va_arg(args, char *);
-		ft_putstr_fd(str, FD);
-		return (ft_strlen(str));
-	}
+		return (ft_putstr(va_arg(args, char *)));
 	else if (type == 'd' || type == 'i')
-	{
-		ft_putnbr_fd((va_arg(args, int)), FD);
-		return (intlen_dec(va_arg(args, int)));
-	}
+		return (ft_putnbr((va_arg(args, int))));
 	else if (type == 'u')
 		return (ft_putunsigned(va_arg(args, unsigned int)));
 	else if (type == 'p')
@@ -59,17 +47,13 @@ int	ft_printf(const	char *format, ...)
 		if (format[i] == '%')
 		{
 			if (format[i + 1] != '\0')
-			{
 				total_len += ft_check_arg(args, format[i + 1]);
-				va_arg(args, int);
-			}
 			i++;
 		}
 		else
-			ft_putchar_fd(format[i], 1);
+			total_len += ft_putchar(format[i]);
 		i++;
 	}
 	va_end(args);
-	printf("\n%d\n", total_len);
 	return (total_len);
 }

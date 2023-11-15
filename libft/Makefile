@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: natalia <natalia@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/24 17:19:02 by natalia           #+#    #+#              #
-#    Updated: 2023/11/02 11:22:01 by natalia          ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: natalia <natalia@student.42.fr>              +#+                      #
+#                                                    +#+                       #
+#    Created: 2023/10/24 17:19:02 by natalia       #+#    #+#                  #
+#    Updated: 2023/11/15 10:45:29 by nmedeiro      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,23 +66,24 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME)
+all: $(NAME) 
+	@echo "Compiled ✅ $^"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 $(NAME): $(OFILES)
-	ar -rc $(NAME) $(OFILES)
+	@ar -rc $(NAME) $(OFILES)
 
 bonus: $(OBONUS)
-	ar -rc $(NAME) $(OBONUS)
+	@ar -rc $(NAME) $(OBONUS)
 
 clean:
-	rm -f $(OFILES)
+	@rm -f $(OFILES)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f $(OBONUS)
+	@rm -f $(NAME)
+	@rm -f $(OBONUS)
 
 re: fclean all
 

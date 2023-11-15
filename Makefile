@@ -6,7 +6,7 @@
 #    By: natalia <natalia@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/13 11:10:51 by nmedeiro      #+#    #+#                  #
-#    Updated: 2023/11/15 08:43:06 by nmedeiro      ########   odam.nl          #
+#    Updated: 2023/11/15 13:54:25 by nmedeiro      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,25 +32,31 @@ LIBFTDIR = libft
 all: $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFTDIR)
+	@echo "Compiling ..."
+	@make -C $(LIBFTDIR) 1> /dev/null
+	@echo "Compiled ✅ $(LIBFT)"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $(OFILES)
 #	cd libft && $(MAKE)
-	ar -rc $(NAME) $(OFILES)
+	@ar -rc $(NAME) $(OFILES)
+	@echo "Compiled ✅ $^"
+
 
 #bonus: $(OBONUS)
 #	ar -rc $(NAME) $(OBONUS)
 
 clean:
-	rm -f $(OFILES)
+	@rm -f $(OFILES)
 
 fclean: clean
-	cd libft && $(MAKE) fclean
-	rm -f $(NAME)
-	rm -f $(OBONUS)
+	@cd libft && $(MAKE) fclean 1> /dev/null
+	@rm -f $(NAME)
+	@rm -f $(OBONUS)
+	@echo
+	@echo "Cleansed ✅"
 
 re: fclean all
 

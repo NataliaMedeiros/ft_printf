@@ -11,6 +11,8 @@ cc -Wall -Werror -Wextra \
 	main.c \
 	ft_printf.c \
 	ft_puthex.c \
+	ft_utils.c \
+	assert.c \
 	-L. -Llibft -lft \
 	-L. -I -lftprint \
 	-o exec/ft_printf
