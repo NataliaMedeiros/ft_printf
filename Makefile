@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: natalia <natalia@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/13 11:10:51 by nmedeiro          #+#    #+#              #
-#    Updated: 2023/11/14 16:35:34 by natalia          ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: natalia <natalia@student.42.fr>              +#+                      #
+#                                                    +#+                       #
+#    Created: 2023/11/13 11:10:51 by nmedeiro      #+#    #+#                  #
+#    Updated: 2023/11/15 08:43:06 by nmedeiro      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,14 +27,18 @@ OFILES = $(CFILES:%.c=%.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+LIBFTDIR = libft
 
 all: $(NAME)
+
+$(LIBFT):
+	make -C $(LIBFTDIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OFILES)
-	cd libft && $(MAKE)
+$(NAME): $(LIBFT) $(OFILES)
+#	cd libft && $(MAKE)
 	ar -rc $(NAME) $(OFILES)
 
 #bonus: $(OBONUS)

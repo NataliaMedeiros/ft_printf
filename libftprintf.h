@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 11:14:35 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/14 18:32:53 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   libftprintf.h                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/13 11:14:35 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/15 08:44:49 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdarg.h>
 
 # define FD 1
+
+int	ft_printf(const	char *format, ...);
 
 int	ft_puthex(unsigned int n, const char type);
 
