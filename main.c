@@ -6,11 +6,11 @@
 /*   By: nmedeiro <nmedeiro@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 08:46:56 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/15 14:09:11 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/15 15:08:36 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "printf.h"
 #include <limits.h>
 
 void	assert(int test_number, int condition);
@@ -24,7 +24,7 @@ void	copy_ft_printf_to_buffer(char *buffer, const char *format, ...)
 	va_end(args);
 }
 
-void	check_for_unit_char(int test_nb, char arg)
+void	check_unit_char(int test_nb, char arg)
 {
 	int		my_len;
 	int		or_len;
@@ -39,7 +39,7 @@ void	check_for_unit_char(int test_nb, char arg)
 	assert(test_nb + 1, (my_len == or_len));
 }
 
-void	check_for_char(void)
+void	check_char(void)
 {
 	int		my_len;
 	int		or_len;
@@ -57,17 +57,32 @@ void	check_for_char(void)
 	assert(1, (my_len == or_len));
 }
 
+void	check_string(int test_nb, char *str)
+{
+	int		my_len;
+	int		or_len;
+	char	buffer[2];
+
+	copy_ft_printf_to_buffer(buffer, "%s\n", str);
+	my_len = ft_printf("My string print: %s", str);
+	ft_printf(" with len = %d\n", my_len);
+	or_len = printf("Or string print: %s", str);
+	printf(" with len = %d\n", or_len);
+	assert(test_nb, strcmp(buffer, str));
+	assert(test_nb + 1, (my_len == or_len));
+}
+
 int	main(void)
 {
 	ft_putchar_fd('\n', 1);
 	/* test 0 and 1*/
-	check_for_char();
+	check_char();
 	ft_putchar_fd('\n', 1);
 	/* test 2 and 3*/
-	check_for_unit_char(2,'5');
+	check_unit_char(2,'5');
 	ft_putchar_fd('\n', 1);
 	/* test 4 and 5*/
-	check_for_unit_char(4,'B');
+	check_unit_char(4,'B');
 	ft_putchar_fd('\n', 1);
 	// int	n;
 	// int	*ptr;
@@ -75,8 +90,10 @@ int	main(void)
 
 	// n = 42;
 	// ptr = &n;
-	ft_printf("My string: %s\n", "avocado");
-	printf("Or string: %s\n\n", "avocado");
+	check_string(6, "avocado");
+	
+	ft_printf("My string");
+	//printf("Or string: %s\n\n", "avocado");
 	// int ft_len = ft_printf("%d\n", 1994);
 	// ft_printf("My decimal: %d\n", ft_len);
 	// int len = printf("%d\n", 1994);

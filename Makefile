@@ -6,7 +6,7 @@
 #    By: natalia <natalia@student.42.fr>              +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/11/13 11:10:51 by nmedeiro      #+#    #+#                  #
-#    Updated: 2023/11/15 13:54:25 by nmedeiro      ########   odam.nl          #
+#    Updated: 2023/11/15 15:09:16 by nmedeiro      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ $(LIBFT):
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $(OFILES)
-#	cd libft && $(MAKE)
 	@ar -rc $(NAME) $(OFILES)
 	@echo "Compiled ✅ $^"
 

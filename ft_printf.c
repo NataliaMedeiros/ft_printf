@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 11:07:22 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/15 09:40:09 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/15 15:13:30 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	ft_check_arg(va_list args, const char type)
 		return ((va_arg(args, unsigned int)), type);
 	else if (type == 'X')
 		return (ft_puthex((va_arg(args, unsigned int)), type));
+	else if (type == '%')
+		return (ft_putchar('%'));
 	return (0);
 }
 

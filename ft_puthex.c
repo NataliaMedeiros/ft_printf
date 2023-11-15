@@ -6,7 +6,7 @@
 /*   By: nmedeiro <nmedeiro@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 14:11:30 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/15 14:12:18 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/15 15:13:35 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,19 @@ int	ft_putpointer(unsigned long n)
 		ft_putstr_fd("0x0", FD);
 		return (3);
 	}
-	str_n = ft_calloc(len, sizeof(char));
-	str_n[0] = '0';
-	str_n[1] = 'x';
-	str_n[len] = '\0';
-	while (n > 0)
+	else
 	{
-		str_n[len - 1] = hex_base[n % 16];
-		n /= 16;
-		len--;
+		str_n = ft_calloc(len, sizeof(char));
+		str_n[0] = '0';
+		str_n[1] = 'x';
+		str_n[len] = '\0';
+		while (n > 0)
+		{
+			str_n[len - 1] = hex_base[n % 16];
+			n /= 16;
+			len--;
+		}
+		ft_putstr_fd(str_n, FD);
 	}
-	ft_putstr_fd(str_n, FD);
 	return (ft_strlen(str_n));
 }
