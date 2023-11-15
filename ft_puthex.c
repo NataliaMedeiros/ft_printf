@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_puthex.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nmedeiro <nmedeiro@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/15 14:11:30 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/15 14:12:18 by nmedeiro      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libftprintf.h"
 
 int	intlen_hex(int nb)
@@ -64,7 +76,7 @@ int	ft_putpointer(unsigned long n)
 	str_n[len] = '\0';
 	while (n > 0)
 	{
-		str_n[len-1] = hex_base[n % 16];
+		str_n[len - 1] = hex_base[n % 16];
 		n /= 16;
 		len--;
 	}
