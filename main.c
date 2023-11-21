@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:46:56 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/17 17:01:09 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/21 14:13:54 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int	main(void)
 	// check_unit_char(5, 0);
 	// ft_printf("%c, %c", '1', 0);
 	// check_string(6, "avocado");
-	check_decimal(8, 1994);
+	//check_decimal(8, 1994);
 	//ft_printf("%u", -1);
 
 	// n = 42;
@@ -150,8 +150,8 @@ int	main(void)
 	// ft_printf("My decimal: %d\n", ft_len);
 	// int len = printf("%d\n", 1994);
 	// printf("Or decimal: %d\n\n", len);
-	// ft_printf("My lower Hex: %x\n", 255);
-	// printf("Or lower Hex: %x\n\n", 255);
+	ft_printf("My lower Hex: %x\n", -1);
+	printf("Or lower Hex: %x\n\n", -1);
 	// ft_printf("My upper Hex: %X, %X, %X\n", 255, 166, 178);
 	// printf("Or upper Hex: %X %X, %X\n\n", 255, 166, 178);
 	// ft_printf("My integer: %i\n", 0x2A);

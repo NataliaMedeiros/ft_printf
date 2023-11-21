@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:14:35 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/17 16:42:52 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/21 14:27:38 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int	ft_printf(const	char *format, ...);
 
-int	ft_puthex(unsigned int n, const char type);
+int	ft_puthex(unsigned long n, const char type);
 
 int	ft_putpointer(unsigned long n);
 

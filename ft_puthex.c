@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:11:30 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/17 17:01:40 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/21 14:28:06 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	intlen_hex(int nb)
 	return (len);
 }
 
-int	ft_puthex(unsigned int n, const char type)
+int	ft_puthex(unsigned long n, const char type)
 {
 	int				len;
 	char			*str_n;
@@ -37,22 +37,20 @@ int	ft_puthex(unsigned int n, const char type)
 	else if (type == 'X')
 		hex_base = "0123456789ABCDEF";
 	if (n == 0)
-		ft_putchar_fd('0', FD);
+		len = ft_putchar('0');
 	else
 	{
-		str_n = ft_calloc(len, sizeof(char));
+		str_n = ft_calloc(len + 1, sizeof(char));
 		str_n[len] = '\0';
-		len -= 1;
 		while (n > 0)
 		{
-			str_n[len] = hex_base[n % 16];
+			str_n[--len] = hex_base[n % 16];
 			n /= 16;
-			len--;
 		}
-		ft_putstr_fd(str_n, FD);
+		len = ft_putstr(str_n);
 		free (str_n);
 	}
-	return (ft_strlen(str_n));
+	return (len);
 }
 
 int	ft_putpointer(unsigned long n)
