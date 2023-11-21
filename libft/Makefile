@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: natalia <natalia@student.42.fr>              +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/10/24 17:19:02 by natalia       #+#    #+#                  #
-#    Updated: 2023/11/15 14:24:29 by nmedeiro      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: natalia <natalia@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/10/24 17:19:02 by natalia           #+#    #+#              #
+#    Updated: 2023/11/17 12:31:54 by natalia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,11 +66,11 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME) 
+all: $(NAME)
 	@echo "Compiled ✅ $^"
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ 
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OFILES)
 	@ar -rc $(NAME) $(OFILES)

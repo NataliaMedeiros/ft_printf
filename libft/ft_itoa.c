@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 08:17:49 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/10 15:54:33 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/17 16:28:51 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_itoa(int n)
 	nb = n;
 	len = intlen(n);
 	new_n = malloc((len + 1) * sizeof(char));
-	if (new_n == NULL)
+	if (!new_n)
 		return (NULL);
 	new_n[len] = '\0';
 	if (nb < 0)

@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: nmedeiro <nmedeiro@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/15 08:46:56 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/15 15:08:36 by nmedeiro      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/15 08:46:56 by nmedeiro          #+#    #+#             */
+/*   Updated: 2023/11/17 17:01:09 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "printf.h"
 #include <limits.h>
 
@@ -28,18 +29,38 @@ void	check_unit_char(int test_nb, char arg)
 {
 	int		my_len;
 	int		or_len;
-	char	buffer[2];
+	char	buffer[1];
 
 	copy_ft_printf_to_buffer(buffer, "%c\n", arg);
 	my_len = ft_printf("My char print: %c", arg);
 	ft_printf(" with len = %d\n", my_len);
-	or_len = printf("Or char print: %c", arg);
+	or_len = printf("My char print: %c", arg);
 	printf(" with len = %d\n", or_len);
-	assert(test_nb, strcmp(buffer, &arg));
+	assert(test_nb, (buffer[0] == arg));
 	assert(test_nb + 1, (my_len == or_len));
 }
 
-void	check_char(void)
+// void	check_char(int test_number, int nb_args, char *res, char	*format, ...)
+// {
+// 	va_list	args;
+// 	char	*str;
+// 	int		len;
+// 	char	temp;
+// 	int		check;
+
+// 	va_start(args, format);
+// 	len = 2 * nb_args - 1;
+// 	str = ft_calloc(len, sizeof(char));
+// 	check = 1;
+// 	for (int i = 0; i < len; i += 2)
+// 	{
+// 		temp = (char)va_arg(args, int);
+// 		str[i] = temp;
+// 	}
+// 	assert(test_number, ft_strncmp(res, str, len));
+// 	va_end(args);
+// }
+void	check_char_0(void)
 {
 	int		my_len;
 	int		or_len;
@@ -57,6 +78,24 @@ void	check_char(void)
 	assert(1, (my_len == or_len));
 }
 
+void	check_char_2(void)
+{
+	int		my_len;
+	int		or_len;
+	char	*buffer;
+	char	*str;
+
+	str = "My char print: 'a', 'b', , 'd', 'e'";
+	buffer = ft_calloc(sizeof(char), (ft_strlen(str) + 1));
+	copy_ft_printf_to_buffer(buffer,
+		"My char print: %c %c %c %c %c\n", 'a', 'b', 0, 'd', 'e');
+	my_len = ft_printf("My char print: %c %c %c %c %c\n",
+			'a', 'b', 0, 'd', 'e');
+	or_len = printf("Or char print: %c %c %c %c %c\n", 'a', 'b', 0, 'd', 'e');
+	assert(2, (ft_strncmp(buffer, str, ft_strlen(str))));
+	assert(3, (my_len == or_len));
+}
+
 void	check_string(int test_nb, char *str)
 {
 	int		my_len;
@@ -72,28 +111,41 @@ void	check_string(int test_nb, char *str)
 	assert(test_nb + 1, (my_len == or_len));
 }
 
+void	check_decimal(int test_nb, int nb)
+{
+	int		my_len;
+	int		or_len;
+	char	*buffer;
+
+	buffer = ft_itoa(nb);
+	my_len = ft_printf("%d", nb);
+	ft_printf(" with len = %d\n", my_len);
+	or_len = printf("%d", nb);
+	printf(" with len = %d\n", or_len);
+	//assert(test_nb, strcmp(buffer, nb));
+	assert(test_nb + 1, (my_len == or_len));
+}
+
 int	main(void)
 {
-	ft_putchar_fd('\n', 1);
-	/* test 0 and 1*/
-	check_char();
-	ft_putchar_fd('\n', 1);
-	/* test 2 and 3*/
-	check_unit_char(2,'5');
-	ft_putchar_fd('\n', 1);
-	/* test 4 and 5*/
-	check_unit_char(4,'B');
-	ft_putchar_fd('\n', 1);
-	// int	n;
-	// int	*ptr;
-
+	// ft_putchar_fd('\n', FD);
+	// check_char_0();
+	// ft_putchar_fd('\n', FD);
+	// check_char_2();
+	// ft_putchar_fd('\n', FD);
+	// check_unit_char(2,'5');
+	// ft_putchar_fd('\n', FD);
+	// check_unit_char(4,'B');
+	// ft_putchar_fd('\n', FD);
+	// check_unit_char(5, 0);
+	// ft_printf("%c, %c", '1', 0);
+	// check_string(6, "avocado");
+	check_decimal(8, 1994);
+	//ft_printf("%u", -1);
 
 	// n = 42;
 	// ptr = &n;
-	check_string(6, "avocado");
-	
-	ft_printf("My string");
-	//printf("Or string: %s\n\n", "avocado");
+
 	// int ft_len = ft_printf("%d\n", 1994);
 	// ft_printf("My decimal: %d\n", ft_len);
 	// int len = printf("%d\n", 1994);

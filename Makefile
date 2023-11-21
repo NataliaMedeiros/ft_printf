@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: natalia <natalia@student.42.fr>              +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/11/13 11:10:51 by nmedeiro      #+#    #+#                  #
-#    Updated: 2023/11/15 15:09:16 by nmedeiro      ########   odam.nl          #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: natalia <natalia@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/13 11:10:51 by nmedeiro          #+#    #+#              #
+#    Updated: 2023/11/17 14:52:46 by natalia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ LIBFT = libft/libft.a
 
 FILES = ft_printf \
 		ft_puthex \
+		ft_utils \
 
 #Bonus =
 
@@ -33,16 +34,16 @@ all: $(NAME)
 
 $(LIBFT):
 	@echo "Compiling ..."
-	@make -C $(LIBFTDIR) 1> /dev/null
+	@make -C $(LIBFTDIR)
 	@echo "Compiled ✅ $(LIBFT)"
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFTDIR)
 
 $(NAME): $(LIBFT) $(OFILES)
-	@ar -rc $(NAME) $(OFILES)
+	@cp $(LIBFT) $(NAME)
+	@ar -rc $(NAME) $(OFILES) ${LIBFT}
 	@echo "Compiled ✅ $^"
-
 
 #bonus: $(OBONUS)
 #	ar -rc $(NAME) $(OBONUS)

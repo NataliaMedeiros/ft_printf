@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   ft_puthex.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: nmedeiro <nmedeiro@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/15 14:11:30 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/15 15:13:35 by nmedeiro      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/15 14:11:30 by nmedeiro          #+#    #+#             */
+/*   Updated: 2023/11/17 17:01:40 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	intlen_hex(int nb)
 {
@@ -22,7 +22,6 @@ int	intlen_hex(int nb)
 		nb /= 16;
 		len++;
 	}
-	len--;
 	return (len);
 }
 
@@ -32,7 +31,7 @@ int	ft_puthex(unsigned int n, const char type)
 	char			*str_n;
 	char			*hex_base;
 
-	len = intlen_hex(n) + 1;
+	len = intlen_hex(n);
 	if (type == 'x')
 		hex_base = "0123456789abcdef";
 	else if (type == 'X')
@@ -51,6 +50,7 @@ int	ft_puthex(unsigned int n, const char type)
 			len--;
 		}
 		ft_putstr_fd(str_n, FD);
+		free (str_n);
 	}
 	return (ft_strlen(str_n));
 }
@@ -63,7 +63,7 @@ int	ft_putpointer(unsigned long n)
 	char			*hex_base;
 
 	nb = n;
-	len = intlen_hex(n) + 4;
+	len = intlen_hex(n) + 3;
 	hex_base = "0123456789abcdef";
 	if (n == 0)
 	{
@@ -83,6 +83,7 @@ int	ft_putpointer(unsigned long n)
 			len--;
 		}
 		ft_putstr_fd(str_n, FD);
+		free (str_n);
 	}
 	return (ft_strlen(str_n));
 }

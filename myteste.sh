@@ -14,7 +14,7 @@ cc -Wall -Werror -Wextra \
 	ft_utils.c \
 	assert.c \
 	-L. -Llibft -lft \
-	-L. -I -lftprint \
+	-L. -I -lftprintf \
 	-o exec/ft_printf
 
 #	echo "Compiling file ${BOLD} ft_printf ${RESET}"

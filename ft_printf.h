@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assert.c                                           :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 15:56:32 by natalia           #+#    #+#             */
-/*   Updated: 2023/11/17 15:08:31 by natalia          ###   ########.fr       */
+/*   Created: 2023/11/13 11:14:35 by nmedeiro          #+#    #+#             */
+/*   Updated: 2023/11/17 16:42:52 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-#define SET_RED "\x1b[31m"
-#define RESET_RED "\x1b[0m"
-#define SET_GREEN "\x1b[32m"
-#define RESET_GREEN "\x1b[0m"
+# include "libft/libft.h"
+# include <stdarg.h>
 
-void	assert(int test_number, int condition)
-{
-	if (!(condition))
-		ft_printf("%s%d:[failed]%s", SET_RED, test_number, RESET_RED);
-	else
-		ft_printf("%s%d:[OK] %s", SET_GREEN, test_number, RESET_GREEN);
-}
+# define FD 1
+
+int	ft_printf(const	char *format, ...);
+
+int	ft_puthex(unsigned int n, const char type);
+
+int	ft_putpointer(unsigned long n);
+
+int	ft_putunsigned(unsigned int n);
+
+int	ft_putchar(int c);
+
+int	ft_putstr(char *str);
+
+int	ft_putnbr(int nb);
+
+#endif
