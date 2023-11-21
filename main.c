@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:46:56 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/21 14:13:54 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/21 16:07:33 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,24 +140,29 @@ int	main(void)
 	// check_unit_char(5, 0);
 	// ft_printf("%c, %c", '1', 0);
 	// check_string(6, "avocado");
+	// ft_printf("%c, %c", '1', 0);
+	// ft_printf("%c, %c", '1', 0);
 	//check_decimal(8, 1994);
 	//ft_printf("%u", -1);
 
-	// n = 42;
-	// ptr = &n;
+	int n = 1;
 
 	// int ft_len = ft_printf("%d\n", 1994);
 	// ft_printf("My decimal: %d\n", ft_len);
 	// int len = printf("%d\n", 1994);
 	// printf("Or decimal: %d\n\n", len);
-	ft_printf("My lower Hex: %x\n", -1);
-	printf("Or lower Hex: %x\n\n", -1);
+	//ft_printf("My lower Hex: %x\n", -1);
+	//printf("Or lower Hex: %x\n\n", -1);
 	// ft_printf("My upper Hex: %X, %X, %X\n", 255, 166, 178);
 	// printf("Or upper Hex: %X %X, %X\n\n", 255, 166, 178);
 	// ft_printf("My integer: %i\n", 0x2A);
 	// printf("Or integer: %i\n\n", 0x2A);
-	// ft_printf("My ptr: %p\n", ptr);
-	// printf("Or ptr: %p\n\n", ptr);
+	int ft_len = ft_printf("My ptr: %p\n", &n);
+	int len = printf("Or ptr: %p\n", &n);
+	ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+
+	// int len = ft_printf("%s\n", (char *)NULL);
+	// printf("len %d", len);
 	// ft_printf("My unsigned %u\n", UINT_MAX);
 	// printf("Or unsigned %u\n\n", UINT_MAX);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 11:07:22 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/21 14:27:29 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/21 15:38:07 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ int	ft_check_arg(va_list args, const char type)
 	if (type == 'c')
 		return (ft_putchar(((char)va_arg(args, int))));
 	else if (type == 's')
+		//printf("Entrei no esle if correto e meu valor %u and %c\n", va_arg(args, unsigned int), type);
 		return (ft_putstr(va_arg(args, char *)));
 	else if (type == 'd' || type == 'i')
 		return (ft_putnbr((va_arg(args, int))));
 	else if (type == 'u')
 		return (ft_putunsigned(va_arg(args, unsigned int)));
 	else if (type == 'p')
-		return ((va_arg(args, unsigned long)));
+		return (ft_putpointer(va_arg(args, unsigned long)));
 	else if (type == 'x')
-		//printf("Entrei no esle if correto e meu valor %d and %c\n", va_arg(args, unsigned int), type);
-		return (ft_puthex((va_arg(args, unsigned long)), type));
+		return (ft_puthex((va_arg(args, unsigned int)), type));
 	else if (type == 'X')
-		return (ft_puthex((va_arg(args, unsigned long)), type));
+		return (ft_puthex((va_arg(args, unsigned int)), type));
 	else if (type == '%')
 		return (ft_putchar('%'));
 	return (0);

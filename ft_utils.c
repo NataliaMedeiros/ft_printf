@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:14:40 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/17 17:00:55 by natalia          ###   ########.fr       */
+/*   Updated: 2023/11/21 15:43:15 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,40 @@ int	ft_putchar(int c)
 
 int	ft_putstr(char *str)
 {
+	if (str == NULL)
+		str = "(null)";
 	ft_putstr_fd(str, FD);
 	return (ft_strlen(str));
 }
+/* old way d and i
+int	ft_putnbr(int nb)
+{
+	char	*nb_char;
+
+	nb_char = ft_itoa(nb);
+	ft_putstr(nb_char);
+	// if (nb == 0)
+	// {
+	// 	ft_putchar('0');
+	// 	return (0);
+	// }
+	// else
+	// {
+	// 	ft_putnbr_fd(nb, FD);
+	// }
+	return (ft_strlen(nb_char));
+}
+*/
 
 int	ft_putnbr(int nb)
 {
-	if (nb == 0)
-	{
-		ft_putchar('0');
-		return (0);
-	}
-	else
-	{
-		ft_putnbr_fd(nb, FD);
-	}
-	return (intlen_dec(nb));
+	char	*nb_char;
+	int		len;
+
+	nb_char = ft_itoa(nb);
+	len = ft_putstr(nb_char);
+	free(nb_char);
+	return (len);
 }
 
 int	ft_putunsigned(unsigned int n)
