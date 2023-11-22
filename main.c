@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 08:46:56 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/21 16:07:33 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/15 08:46:56 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/22 14:09:06 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(void)
 	//check_decimal(8, 1994);
 	//ft_printf("%u", -1);
 
-	int n = 1;
+	//int n = 0;
 
 	// int ft_len = ft_printf("%d\n", 1994);
 	// ft_printf("My decimal: %d\n", ft_len);
@@ -157,13 +157,19 @@ int	main(void)
 	// printf("Or upper Hex: %X %X, %X\n\n", 255, 166, 178);
 	// ft_printf("My integer: %i\n", 0x2A);
 	// printf("Or integer: %i\n\n", 0x2A);
-	int ft_len = ft_printf("My ptr: %p\n", &n);
-	int len = printf("Or ptr: %p\n", &n);
-	ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+	//int ft_len = 
+	//ft_printf("My ptr: %p\n", &n);
+	//int len = printf("Or ptr: %p\n", &n);
+	//ft_printf("ft_len = %d and len = %d\n", ft_len, len);
 
 	// int len = ft_printf("%s\n", (char *)NULL);
 	// printf("len %d", len);
 	// ft_printf("My unsigned %u\n", UINT_MAX);
 	// printf("Or unsigned %u\n\n", UINT_MAX);
+	int i = 0;
+	int ft_len = ft_printf("%i\n", i);
+	int len = printf("%i\n", i);
+	ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+
 	return (0);
 }

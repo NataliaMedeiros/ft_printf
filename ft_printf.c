@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 11:07:22 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/21 15:38:07 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_printf.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/13 11:07:22 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/22 13:54:30 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	ft_check_arg(va_list args, const char type)
 {
-	//printf("Cheguei no ft_check_arg como %c\n", type);
 	if (type == 'c')
 		return (ft_putchar(((char)va_arg(args, int))));
 	else if (type == 's')
-		//printf("Entrei no esle if correto e meu valor %u and %c\n", va_arg(args, unsigned int), type);
 		return (ft_putstr(va_arg(args, char *)));
 	else if (type == 'd' || type == 'i')
 		return (ft_putnbr((va_arg(args, int))));
@@ -52,7 +50,6 @@ int	ft_printf(const	char *format, ...)
 		{
 			if (format[i + 1] != '\0')
 				total_len += ft_check_arg(args, format[i + 1]);
-				va_arg(args, int); //at my computer this line is necessary
 			i++;
 		}
 		else
@@ -60,6 +57,5 @@ int	ft_printf(const	char *format, ...)
 		i++;
 	}
 	va_end(args);
-	//free (args);
 	return (total_len);
 }

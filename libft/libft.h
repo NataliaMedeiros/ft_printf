@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 16:51:10 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/08 14:30:29 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   libft.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/11 16:51:10 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/22 14:46:35 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <ctype.h>
 # include <limits.h>
+# include <stdint.h>
 
 typedef struct s_list
 {

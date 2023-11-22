@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 09:14:40 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/21 15:43:15 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_utils.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/11/15 09:14:40 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/22 11:55:27 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,6 @@ int	ft_putstr(char *str)
 	ft_putstr_fd(str, FD);
 	return (ft_strlen(str));
 }
-/* old way d and i
-int	ft_putnbr(int nb)
-{
-	char	*nb_char;
-
-	nb_char = ft_itoa(nb);
-	ft_putstr(nb_char);
-	// if (nb == 0)
-	// {
-	// 	ft_putchar('0');
-	// 	return (0);
-	// }
-	// else
-	// {
-	// 	ft_putnbr_fd(nb, FD);
-	// }
-	return (ft_strlen(nb_char));
-}
-*/
 
 int	ft_putnbr(int nb)
 {
@@ -83,20 +64,15 @@ int	ft_putunsigned(unsigned int n)
 	nb = n;
 	len = intlen_dec(nb);
 	if (n == 0)
-	{
-		ft_putchar_fd('0', FD);
-		return (1);
-	}
+		return (ft_putchar('0'));
 	else
 	{
 		str_n = ft_calloc(len + 1, sizeof(char));
 		str_n[len] = '\0';
-		len--;
 		while (nb > 0)
 		{
-			str_n[len] = nb % 10 + '0';
+			str_n[--len] = nb % 10 + '0';
 			nb /= 10;
-			len--;
 		}
 		ft_putstr_fd(str_n, FD);
 		len = ft_strlen(str_n);
