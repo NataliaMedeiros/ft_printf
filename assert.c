@@ -26,3 +26,6 @@ void	assert(int test_number, int condition)
 	else
 		ft_printf("%s%d:[OK] %s", SET_GREEN, test_number, RESET_GREEN);
 }
+
+
+tetest
