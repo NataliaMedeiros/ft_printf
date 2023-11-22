@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   assert.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 15:56:32 by natalia           #+#    #+#             */
-/*   Updated: 2023/11/17 15:08:31 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   assert.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/25 15:56:32 by natalia       #+#    #+#                 */
+/*   Updated: 2023/11/22 15:54:28 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,3 @@ void	assert(int test_number, int condition)
 	else
 		ft_printf("%s%d:[OK] %s", SET_GREEN, test_number, RESET_GREEN);
 }
-
-
-tetest
