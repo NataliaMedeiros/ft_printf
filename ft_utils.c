@@ -6,25 +6,20 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 09:14:40 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/22 11:55:27 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/27 18:20:32 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	intlen_dec(unsigned int nb)
+int	intlen(unsigned long nb, int base)
 {
 	int	len;
 
 	len = 0;
-	if (nb < 0)
-	{
-		nb *= -1;
-		len = 1;
-	}
 	while (nb != 0)
 	{
-		nb /= 10;
+		nb /= base;
 		len++;
 	}
 	return (len);
@@ -62,20 +57,18 @@ int	ft_putunsigned(unsigned int n)
 	char			*str_n;
 
 	nb = n;
-	len = intlen_dec(nb);
+	len = intlen(nb, 10);
 	if (n == 0)
 		return (ft_putchar('0'));
 	else
 	{
 		str_n = ft_calloc(len + 1, sizeof(char));
-		str_n[len] = '\0';
 		while (nb > 0)
 		{
 			str_n[--len] = nb % 10 + '0';
 			nb /= 10;
 		}
-		ft_putstr_fd(str_n, FD);
-		len = ft_strlen(str_n);
+		len = ft_putstr(str_n);
 		free (str_n);
 	}
 	return (len);

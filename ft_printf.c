@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/13 11:07:22 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/22 13:54:30 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/27 18:05:22 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int	ft_printf(const	char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] != '\0')
-				total_len += ft_check_arg(args, format[i + 1]);
+			total_len += ft_check_arg(args, format[i + 1]);
 			i++;
 		}
 		else
