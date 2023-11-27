@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/15 08:46:56 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/22 14:09:06 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/27 18:32:45 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,24 +126,24 @@ void	check_decimal(int test_nb, int nb)
 	assert(test_nb + 1, (my_len == or_len));
 }
 
+
 int	main(void)
 {
-	// ft_putchar_fd('\n', FD);
-	// check_char_0();
-	// ft_putchar_fd('\n', FD);
-	// check_char_2();
-	// ft_putchar_fd('\n', FD);
-	// check_unit_char(2,'5');
-	// ft_putchar_fd('\n', FD);
-	// check_unit_char(4,'B');
-	// ft_putchar_fd('\n', FD);
-	// check_unit_char(5, 0);
-	// ft_printf("%c, %c", '1', 0);
-	// check_string(6, "avocado");
-	// ft_printf("%c, %c", '1', 0);
-	// ft_printf("%c, %c", '1', 0);
-	//check_decimal(8, 1994);
-	//ft_printf("%u", -1);
+	ft_putchar_fd('\n', FD);
+	check_char_0();
+	ft_putchar_fd('\n', FD);
+	check_char_2();
+	ft_putchar_fd('\n', FD);
+	check_unit_char(2,'5');
+	ft_putchar_fd('\n', FD);
+	check_unit_char(4,'B');
+	ft_putchar_fd('\n', FD);
+	check_unit_char(6, 0);
+	ft_putchar_fd('\n', FD);
+	check_string(8, "avocado");
+	ft_putchar_fd('\n', FD);
+	check_decimal(10, 1994);
+	ft_putchar_fd('\n', FD);
 
 	//int n = 0;
 
