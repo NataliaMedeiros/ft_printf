@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/26 08:19:25 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/10 16:46:21 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_split.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/10/26 08:19:25 by nmedeiro      #+#    #+#                 */
+/*   Updated: 2023/11/27 14:53:57 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,6 @@ int	count_words(char const *s, char c)
 	return (i_word);
 }
 
-char	*malloc_str(char const *s, char c)
-{
-	int		i;
-	char	*word;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	word = (char *)malloc(sizeof(char) * (i + 1));
-	if (word == NULL)
-	{
-		return (NULL);
-	}
-	i = 0;
-	while (s[i] && s[i] != c)
-	{
-		word[i] = s[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
-}
-
 char	**free_words(char **new_word, int i)
 {
 	while (i >= 0)
@@ -65,23 +42,29 @@ char	**free_words(char **new_word, int i)
 	return (new_word);
 }
 
-char	**filling_new_word(char **new_word, const char *s, char c, int i)
+char	**filling_new_word(char **new_word, const char *s, char c, int start)
 {
-	while (*s != '\0')
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (s[n] != '\0')
 	{
-		while (*s && *s == c)
-			s++;
-		if (*s && *s != c)
+		while (s[n] && s[n] == c)
+			n++;
+		start = n;
+		if (s[n] && s[n] != c)
 		{
-			new_word[i] = malloc_str(s, c);
+			while (s[n] != c && s[n] != '\0')
+				n++;
+			new_word[i] = ft_substr(s, start, (n - start));
 			if (new_word[i] == NULL)
 			{
 				free_words(new_word, i);
 				return (NULL);
 			}
 			i++;
-			while (*s != c && *s != '\0')
-				s++;
 		}
 	}
 	new_word[i] = NULL;
@@ -91,14 +74,14 @@ char	**filling_new_word(char **new_word, const char *s, char c, int i)
 char	**ft_split(char const *s, char c)
 {
 	char	**new_word;
-	int		i;
+	int		start;
 
+	start = 0;
 	if (!s)
 		return (NULL);
 	new_word = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!new_word)
 		return (NULL);
-	i = 0;
-	new_word = filling_new_word(new_word, s, c, i);
+	new_word = filling_new_word(new_word, s, c, start);
 	return (new_word);
 }
