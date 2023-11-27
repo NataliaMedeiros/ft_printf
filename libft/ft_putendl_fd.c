@@ -6,7 +6,7 @@
 /*   By: nmedeiro <nmedeiro@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/26 08:18:51 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/22 14:43:17 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2023/11/27 14:29:14 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	ft_ft_putstr_fd(s, fd);
+	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }
