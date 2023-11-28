@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: natalia <natalia@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/11/15 08:46:56 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2023/11/27 18:32:45 by nmedeiro      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/15 08:46:56 by nmedeiro          #+#    #+#             */
+/*   Updated: 2023/11/28 18:37:08 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,6 @@ void	check_unit_char(int test_nb, char arg)
 	assert(test_nb + 1, (my_len == or_len));
 }
 
-// void	check_char(int test_number, int nb_args, char *res, char	*format, ...)
-// {
-// 	va_list	args;
-// 	char	*str;
-// 	int		len;
-// 	char	temp;
-// 	int		check;
-
-// 	va_start(args, format);
-// 	len = 2 * nb_args - 1;
-// 	str = ft_calloc(len, sizeof(char));
-// 	check = 1;
-// 	for (int i = 0; i < len; i += 2)
-// 	{
-// 		temp = (char)va_arg(args, int);
-// 		str[i] = temp;
-// 	}
-// 	assert(test_number, ft_strncmp(res, str, len));
-// 	va_end(args);
-// }
 void	check_char_0(void)
 {
 	int		my_len;
@@ -127,49 +107,132 @@ void	check_decimal(int test_nb, int nb)
 }
 
 
-int	main(void)
+// int	main(void)
+// {
+// 	ft_putchar_fd('\n', FD);
+// 	check_char_0();
+// 	ft_putchar_fd('\n', FD);
+// 	check_char_2();
+// 	ft_putchar_fd('\n', FD);
+// 	check_unit_char(2,'5');
+// 	ft_putchar_fd('\n', FD);
+// 	check_unit_char(4,'B');
+// 	ft_putchar_fd('\n', FD);
+// 	check_unit_char(6, 0);
+// 	ft_putchar_fd('\n', FD);
+// 	check_string(8, "avocado");
+// 	ft_putchar_fd('\n', FD);
+// 	check_decimal(10, 1994);
+// 	ft_putchar_fd('\n', FD);
+
+// 	//int n = 0;
+
+// 	// int ft_len = ft_printf("%d\n", 1994);
+// 	// ft_printf("My decimal: %d\n", ft_len);
+// 	// int len = printf("%d\n", 1994);
+// 	// printf("Or decimal: %d\n\n", len);
+// 	//ft_printf("My lower Hex: %x\n", -1);
+// 	//printf("Or lower Hex: %x\n\n", -1);
+// 	// ft_printf("My upper Hex: %X, %X, %X\n", 255, 166, 178);
+// 	// printf("Or upper Hex: %X %X, %X\n\n", 255, 166, 178);
+// 	// ft_printf("My integer: %i\n", 0x2A);
+// 	// printf("Or integer: %i\n\n", 0x2A);
+// 	//int ft_len =
+// 	//ft_printf("My ptr: %p\n", &n);
+// 	//int len = printf("Or ptr: %p\n", &n);
+// 	//ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+
+// 	// int len = ft_printf("%s\n", (char *)NULL);
+// 	// printf("len %d", len);
+// 	// ft_printf("My unsigned %u\n", UINT_MAX);
+// 	// printf("Or unsigned %u\n\n", UINT_MAX);
+// 	int i = 0;
+// 	int ft_len = ft_printf("%i\n", i);
+// 	int len = printf("%i\n", i);
+// 	ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+
+// 	return (0);
+// }
+
+
+// Function to compare the contents of two files
+int compareFiles(const char *file1, const char *file2) {
+    FILE *f1 = fopen(file1, "r");
+    FILE *f2 = fopen(file2, "r");
+	int result = 1;
+	int c1;
+	int c2;
+    while ((c1 = fgetc(f1)) != EOF && (c2 = fgetc(f2)) != EOF) {
+        if (c1 != c2) {
+            result = 0; // Files are different
+            break;      // No need to continue checking
+        }
+    }
+    return (result); // Files are identical
+}
+
+void test_print(int test_number, char type, char * s, ...)
 {
-	ft_putchar_fd('\n', FD);
-	check_char_0();
-	ft_putchar_fd('\n', FD);
-	check_char_2();
-	ft_putchar_fd('\n', FD);
-	check_unit_char(2,'5');
-	ft_putchar_fd('\n', FD);
-	check_unit_char(4,'B');
-	ft_putchar_fd('\n', FD);
-	check_unit_char(6, 0);
-	ft_putchar_fd('\n', FD);
-	check_string(8, "avocado");
-	ft_putchar_fd('\n', FD);
-	check_decimal(10, 1994);
-	ft_putchar_fd('\n', FD);
+	va_list	args;
 
-	//int n = 0;
+	va_start(args, s);
+	char arg = '';
+	if (type == 'c')
+		arg = va_arg(args, char);
+	else if (type == 's')
+		arg = va_arg(args, char *);
+	freopen("output.txt", "w", stdout);
 
-	// int ft_len = ft_printf("%d\n", 1994);
-	// ft_printf("My decimal: %d\n", ft_len);
-	// int len = printf("%d\n", 1994);
-	// printf("Or decimal: %d\n\n", len);
-	//ft_printf("My lower Hex: %x\n", -1);
-	//printf("Or lower Hex: %x\n\n", -1);
-	// ft_printf("My upper Hex: %X, %X, %X\n", 255, 166, 178);
-	// printf("Or upper Hex: %X %X, %X\n\n", 255, 166, 178);
-	// ft_printf("My integer: %i\n", 0x2A);
-	// printf("Or integer: %i\n\n", 0x2A);
-	//int ft_len = 
-	//ft_printf("My ptr: %p\n", &n);
-	//int len = printf("Or ptr: %p\n", &n);
-	//ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+    // Use standard printf
+    printf(s, arg);
 
-	// int len = ft_printf("%s\n", (char *)NULL);
-	// printf("len %d", len);
-	// ft_printf("My unsigned %u\n", UINT_MAX);
-	// printf("Or unsigned %u\n\n", UINT_MAX);
-	int i = 0;
-	int ft_len = ft_printf("%i\n", i);
-	int len = printf("%i\n", i);
-	ft_printf("ft_len = %d and len = %d\n", ft_len, len);
+    // Redirect standard output back to the console
+    freopen("/dev/tty", "w", stdout);
 
-	return (0);
+    // Redirect standard output to a different file for your custom printf
+    freopen("my_output.txt", "w", stdout);
+
+    // Use your custom printf
+    ft_printf(s,arg);
+
+    // Redirect standard output back to the console
+    freopen("/dev/tty", "w", stdout);
+
+    // Compare the contents of the two output files directly
+    if ((compareFiles("output.txt", "my_output.txt")) == 1) {
+        printf("Both printf functions produced the same output.\n");
+    } else {
+        printf("Output mismatch between printf functions.\n");
+    }
+}
+
+int main()
+{
+	test_print(0, 's', "Hello, %s!\n", "world");
+
+	// freopen("output.txt", "w", stdout);
+
+    // // Use standard printf
+    // printf("Hello, %s!\n", "world");
+
+    // // Redirect standard output back to the console
+    // freopen("/dev/tty", "w", stdout);
+
+    // // Redirect standard output to a different file for your custom printf
+    // freopen("my_output.txt", "w", stdout);
+
+    // // Use your custom printf
+    // ft_printf("Hello, %s!\n", "world");
+
+    // // Redirect standard output back to the console
+    // freopen("/dev/tty", "w", stdout);
+
+    // // Compare the contents of the two output files directly
+    // if ((compareFiles("output.txt", "my_output.txt")) == 1) {
+    //     printf("Both printf functions produced the same output.\n");
+    // } else {
+    //     printf("Output mismatch between printf functions.\n");
+    // }
+
+    return 0;
 }
