@@ -6,233 +6,251 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 08:46:56 by nmedeiro          #+#    #+#             */
-/*   Updated: 2023/11/28 18:37:08 by natalia          ###   ########.fr       */
+/*   Updated: 2024/01/12 13:59:40 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "printf.h"
 #include <limits.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdarg.h>
 
-void	assert(int test_number, int condition);
 
-void	copy_ft_printf_to_buffer(char *buffer, const char *format, ...)
+#define SET_RED "\x1b[31m"
+#define RESET_RED "\x1b[0m"
+
+void	assert(int test_number, int condition)
 {
-	va_list	args;
-
-	va_start(args, format);
-	vsprintf(buffer, format, args);
-	va_end(args);
+	if (!(condition))
+		ft_printf("\x1b[31m%d:[failed]\x1b[0m ", test_number);
+	else
+		ft_printf("\x1b[32m%d:[OK]\x1b[0m ", test_number);
 }
 
-void	check_unit_char(int test_nb, char arg)
+/* the function checks both outputs and return 1 if they are the same and 0 if not */
+/* fgetc is a standart c funtion that takes the next caracter from de file         */
+/* EOF is defined in stdio.h and represents the End Of a File                      */
+int	compare_files(const char *file1, const char *file2)
 {
-	int		my_len;
-	int		or_len;
-	char	buffer[1];
+	FILE	*fd1;
+	FILE	*fd2;
+	int		result;
+	int		c1;
+	int		c2;
 
-	copy_ft_printf_to_buffer(buffer, "%c\n", arg);
-	my_len = ft_printf("My char print: %c", arg);
-	ft_printf(" with len = %d\n", my_len);
-	or_len = printf("My char print: %c", arg);
-	printf(" with len = %d\n", or_len);
-	assert(test_nb, (buffer[0] == arg));
-	assert(test_nb + 1, (my_len == or_len));
+	fd1 = fopen(file1, "r");
+	fd2 = fopen(file2, "r");
+	c1 = fgetc(fd1);
+	c2 = fgetc(fd2);
+	result = 1;
+	while (c1 != EOF && c2 != EOF)
+	{
+		if (c1 != c2)
+		{
+			result = 0;
+			break ;
+		}
+		c1 = fgetc(fd1);
+		c2 = fgetc(fd2);
+	}
+	return (result);
 }
 
-void	check_char_0(void)
+/* Function compare_outputs compares the output of your printf and the original printf  */
+/* Function freopen directs the output to a especific file ir to the terminal           */
+int	compare_outputs(int test_number, const char *format, ...)
 {
-	int		my_len;
-	int		or_len;
-	char	*buffer;
-	char	*str;
+	va_list	args_original;
+	va_list	args_custom;
+	int		res_original;
+	int		res_custom;
 
-	str = "My char print: 'a', 'b', 'c', 'd', 'e'";
-	buffer = ft_calloc(sizeof(char), (ft_strlen(str) + 1));
-	copy_ft_printf_to_buffer(buffer,
-		"My char print: %c %c %c %c %c\n", 'a', 'b', 'c', 'd', 'e');
-	my_len = ft_printf("My char print: %c %c %c %c %c\n",
-			'a', 'b', 'c', 'd', 'e');
-	or_len = printf("Or char print: %c %c %c %c %c\n", 'a', 'b', 'c', 'd', 'e');
-	assert(0, (ft_strncmp(buffer, str, ft_strlen(str))));
-	assert(1, (my_len == or_len));
-}
-
-void	check_char_2(void)
-{
-	int		my_len;
-	int		or_len;
-	char	*buffer;
-	char	*str;
-
-	str = "My char print: 'a', 'b', , 'd', 'e'";
-	buffer = ft_calloc(sizeof(char), (ft_strlen(str) + 1));
-	copy_ft_printf_to_buffer(buffer,
-		"My char print: %c %c %c %c %c\n", 'a', 'b', 0, 'd', 'e');
-	my_len = ft_printf("My char print: %c %c %c %c %c\n",
-			'a', 'b', 0, 'd', 'e');
-	or_len = printf("Or char print: %c %c %c %c %c\n", 'a', 'b', 0, 'd', 'e');
-	assert(2, (ft_strncmp(buffer, str, ft_strlen(str))));
-	assert(3, (my_len == or_len));
-}
-
-void	check_string(int test_nb, char *str)
-{
-	int		my_len;
-	int		or_len;
-	char	buffer[2];
-
-	copy_ft_printf_to_buffer(buffer, "%s\n", str);
-	my_len = ft_printf("My string print: %s", str);
-	ft_printf(" with len = %d\n", my_len);
-	or_len = printf("Or string print: %s", str);
-	printf(" with len = %d\n", or_len);
-	assert(test_nb, strcmp(buffer, str));
-	assert(test_nb + 1, (my_len == or_len));
-}
-
-void	check_decimal(int test_nb, int nb)
-{
-	int		my_len;
-	int		or_len;
-	char	*buffer;
-
-	buffer = ft_itoa(nb);
-	my_len = ft_printf("%d", nb);
-	ft_printf(" with len = %d\n", my_len);
-	or_len = printf("%d", nb);
-	printf(" with len = %d\n", or_len);
-	//assert(test_nb, strcmp(buffer, nb));
-	assert(test_nb + 1, (my_len == or_len));
-}
-
-
-// int	main(void)
-// {
-// 	ft_putchar_fd('\n', FD);
-// 	check_char_0();
-// 	ft_putchar_fd('\n', FD);
-// 	check_char_2();
-// 	ft_putchar_fd('\n', FD);
-// 	check_unit_char(2,'5');
-// 	ft_putchar_fd('\n', FD);
-// 	check_unit_char(4,'B');
-// 	ft_putchar_fd('\n', FD);
-// 	check_unit_char(6, 0);
-// 	ft_putchar_fd('\n', FD);
-// 	check_string(8, "avocado");
-// 	ft_putchar_fd('\n', FD);
-// 	check_decimal(10, 1994);
-// 	ft_putchar_fd('\n', FD);
-
-// 	//int n = 0;
-
-// 	// int ft_len = ft_printf("%d\n", 1994);
-// 	// ft_printf("My decimal: %d\n", ft_len);
-// 	// int len = printf("%d\n", 1994);
-// 	// printf("Or decimal: %d\n\n", len);
-// 	//ft_printf("My lower Hex: %x\n", -1);
-// 	//printf("Or lower Hex: %x\n\n", -1);
-// 	// ft_printf("My upper Hex: %X, %X, %X\n", 255, 166, 178);
-// 	// printf("Or upper Hex: %X %X, %X\n\n", 255, 166, 178);
-// 	// ft_printf("My integer: %i\n", 0x2A);
-// 	// printf("Or integer: %i\n\n", 0x2A);
-// 	//int ft_len =
-// 	//ft_printf("My ptr: %p\n", &n);
-// 	//int len = printf("Or ptr: %p\n", &n);
-// 	//ft_printf("ft_len = %d and len = %d\n", ft_len, len);
-
-// 	// int len = ft_printf("%s\n", (char *)NULL);
-// 	// printf("len %d", len);
-// 	// ft_printf("My unsigned %u\n", UINT_MAX);
-// 	// printf("Or unsigned %u\n\n", UINT_MAX);
-// 	int i = 0;
-// 	int ft_len = ft_printf("%i\n", i);
-// 	int len = printf("%i\n", i);
-// 	ft_printf("ft_len = %d and len = %d\n", ft_len, len);
-
-// 	return (0);
-// }
-
-
-// Function to compare the contents of two files
-int compareFiles(const char *file1, const char *file2) {
-    FILE *f1 = fopen(file1, "r");
-    FILE *f2 = fopen(file2, "r");
-	int result = 1;
-	int c1;
-	int c2;
-    while ((c1 = fgetc(f1)) != EOF && (c2 = fgetc(f2)) != EOF) {
-        if (c1 != c2) {
-            result = 0; // Files are different
-            break;      // No need to continue checking
-        }
-    }
-    return (result); // Files are identical
-}
-
-void test_print(int test_number, char type, char * s, ...)
-{
-	va_list	args;
-
-	va_start(args, s);
-	char arg = '';
-	if (type == 'c')
-		arg = va_arg(args, char);
-	else if (type == 's')
-		arg = va_arg(args, char *);
 	freopen("output.txt", "w", stdout);
-
-    // Use standard printf
-    printf(s, arg);
-
-    // Redirect standard output back to the console
-    freopen("/dev/tty", "w", stdout);
-
-    // Redirect standard output to a different file for your custom printf
-    freopen("my_output.txt", "w", stdout);
-
-    // Use your custom printf
-    ft_printf(s,arg);
-
-    // Redirect standard output back to the console
-    freopen("/dev/tty", "w", stdout);
-
-    // Compare the contents of the two output files directly
-    if ((compareFiles("output.txt", "my_output.txt")) == 1) {
-        printf("Both printf functions produced the same output.\n");
-    } else {
-        printf("Output mismatch between printf functions.\n");
-    }
+	va_start(args_original, format);
+	res_original = printf(format, args_original);
+	va_end(args_original);
+	freopen("my_output.txt", "w", stdout);
+	va_start(args_custom, format);
+	res_custom = ft_printf(format, args_custom);
+	va_end(args_custom);
+	freopen("/dev/tty", "w", stdout);
+	assert(test_number, ((res_custom == res_original)
+			&& (compare_files("output.txt", "my_output.txt")) == 1));
+	return (0);
 }
 
-int main()
+void	test_char(void)
 {
-	test_print(0, 's', "Hello, %s!\n", "world");
-
-	// freopen("output.txt", "w", stdout);
-
-    // // Use standard printf
-    // printf("Hello, %s!\n", "world");
-
-    // // Redirect standard output back to the console
-    // freopen("/dev/tty", "w", stdout);
-
-    // // Redirect standard output to a different file for your custom printf
-    // freopen("my_output.txt", "w", stdout);
-
-    // // Use your custom printf
-    // ft_printf("Hello, %s!\n", "world");
-
-    // // Redirect standard output back to the console
-    // freopen("/dev/tty", "w", stdout);
-
-    // // Compare the contents of the two output files directly
-    // if ((compareFiles("output.txt", "my_output.txt")) == 1) {
-    //     printf("Both printf functions produced the same output.\n");
-    // } else {
-    //     printf("Output mismatch between printf functions.\n");
-    // }
-
-    return 0;
+	printf("Format c: ");
+	compare_outputs(1, "%c", 'c');
+	compare_outputs(2, "%c%c%c%c%c%c%c%c%c%c", 'a', 'b', 'c', 'd',
+		'e', 'f', 'g', 'h', 'i', 'j');
+	compare_outputs(3, "%c", '1');
+	compare_outputs(4, "%s %s %s %s %s %s %s %s %s %s", '1', '2', '3', '4', '5',
+		'6', '7', '8', '9', '0');
+	compare_outputs(5, "Char print: %c %c %c %c %c\n", 'a', 'b', 0, 'd', 'e');
 }
+
+void	test_string(void)
+{
+	printf("Format s: ");
+	compare_outputs(3, "%s", "Hello, World!");
+	//compare_outputs(4, "Fruits: %s, %s, %s, %s, %s and %s", "avocado",
+	//	"banana", "carrot", "kiwi", "grape", "passion fruit");
+}
+
+void	test_d(void)
+{
+	printf("Format d: ");
+	compare_outputs(1, "%d", 0);
+	compare_outputs(2, "%d", -1);
+	compare_outputs(3, "%d", 42);
+	compare_outputs(4, "%d", -42);
+	compare_outputs(5, "%d", 102);
+	compare_outputs(6, "%d", -102);
+	compare_outputs(7, "%d", 1024);
+	compare_outputs(8, "%d", -1024);
+	compare_outputs(9, "%d", INT_MAX);
+	compare_outputs(10, "%d", INT_MIN);
+	compare_outputs(11, "%d", LONG_MAX);
+	compare_outputs(12, "%d", LONG_MIN);
+	compare_outputs(13, "%d", -10000000);
+	compare_outputs(14, "%d", 10000000);
+	compare_outputs(15, "%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d",
+		0, -1, 42, -42, 102, -102, 1024, -1024, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+
+void	test_i(void)
+{
+	printf("Format i: ");
+	compare_outputs(1, "%i", 0);
+	compare_outputs(2, "%i", -1);
+	compare_outputs(3, "%i", 42);
+	compare_outputs(4, "%i", -42);
+	compare_outputs(5, "%i", 102);
+	compare_outputs(6, "%i", -102);
+	compare_outputs(7, "%i", 1024);
+	compare_outputs(8, "%i", -1024);
+	compare_outputs(9, "%i", INT_MAX);
+	compare_outputs(10, "%i", INT_MIN);
+	compare_outputs(11, "%i", LONG_MAX);
+	compare_outputs(12, "%i", LONG_MIN);
+	compare_outputs(13, "%i", -10000000);
+	compare_outputs(14, "%i", 10000000);
+	compare_outputs(15, "%i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i, %i",
+		0, -1, 42, -42, 102, -102, 1024, -1024, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+
+void	test_u(void)
+{
+	printf("Format u: ");
+	compare_outputs(1, "%u", 0);
+	compare_outputs(2, "%u", -1);
+	compare_outputs(3, "%u", 42);
+	compare_outputs(4, "%u", -42);
+	compare_outputs(5, "%u", 102);
+	compare_outputs(6, "%u", -102);
+	compare_outputs(7, "%u", 1024);
+	compare_outputs(8, "%u", -1024);
+	compare_outputs(9, "%u", INT_MAX);
+	compare_outputs(10, "%u", INT_MIN);
+	compare_outputs(11, "%u", LONG_MAX);
+	compare_outputs(12, "%u", LONG_MIN);
+	compare_outputs(13, "%u", -10000000);
+	compare_outputs(14, "%u", 10000000);
+	compare_outputs(15, "%u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u, %u",
+		0, -1, 42, -42, 102, -102, 1024, -1024, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+
+void	test_p(void)
+{
+	printf("Format p: ");
+	compare_outputs(1, "%p", 0);
+	compare_outputs(2, "%p", -1);
+	compare_outputs(3, "%p", 42);
+	compare_outputs(4, "%p", -42);
+	compare_outputs(5, "%p", 102);
+	compare_outputs(6, "%p", -102);
+	compare_outputs(7, "%p", 1024);
+	compare_outputs(8, "%p", -1024);
+	compare_outputs(9, "%p", INT_MAX);
+	compare_outputs(10, "%p", INT_MIN);
+	compare_outputs(11, "%p", LONG_MAX);
+	compare_outputs(12, "%p", LONG_MIN);
+	compare_outputs(13, "%p", -10000000);
+	compare_outputs(14, "%p", 10000000);
+	compare_outputs(15, "%p, %p, %p, %p, %p, %p, %p, %p, %p, %p",
+		0, -1, 42, -42, 102, -102, 1024, -1024);
+}
+
+void	test_x(void)
+{
+	printf("Format x: ");
+	compare_outputs(1, "%x", 0);
+	compare_outputs(2, "%x", -1);
+	compare_outputs(3, "%x", 42);
+	compare_outputs(4, "%x", -42);
+	compare_outputs(5, "%x", 102);
+	compare_outputs(6, "%x", -102);
+	compare_outputs(7, "%x", 1024);
+	compare_outputs(8, "%x", -1024);
+	compare_outputs(9, "%x", INT_MAX);
+	compare_outputs(10, "%x", INT_MIN);
+	compare_outputs(11, "%x", LONG_MAX);
+	compare_outputs(12, "%x", LONG_MIN);
+	compare_outputs(13, "%x", -10000000);
+	compare_outputs(14, "%x", 10000000);
+	compare_outputs(15, "%x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x, %x",
+		0, -1, 42, -42, 102, -102, 1024, -1024, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+
+void	test_upperx(void)
+{
+	printf("Format X: ");
+	compare_outputs(1, "%X", 0);
+	compare_outputs(2, "%X", -1);
+	compare_outputs(3, "%X", 42);
+	compare_outputs(4, "%X", -42);
+	compare_outputs(5, "%X", 102);
+	compare_outputs(6, "%X", -102);
+	compare_outputs(7, "%X", 1024);
+	compare_outputs(8, "%X", -1024);
+	compare_outputs(9, "%X", INT_MAX);
+	compare_outputs(10, "%X", INT_MIN);
+	compare_outputs(11, "%X", LONG_MAX);
+	compare_outputs(12, "%X", LONG_MIN);
+	compare_outputs(13, "%X", -10000000);
+	compare_outputs(14, "%X", 10000000);
+	compare_outputs(15, "%X, %X, %X, %X, %X, %X, %X, %X, %X, %X, %X, %X, %X, %X",
+		0, -1, 42, -42, 102, -102, 1024, -1024, INT_MAX, INT_MIN, LONG_MAX, LONG_MIN);
+}
+
+void	test_multiplo(void)
+{
+	printf("Format multiplo: ");
+	compare_outputs(1, "%%");
+	compare_outputs(2, "%%%%");
+	compare_outputs(3, "%% %%");
+	compare_outputs(4, "%% %% %%");
+	compare_outputs(5, "%%%%%%");
+	compare_outputs(2, "%%%c%%", 'c');
+	compare_outputs(2, "%s%%%%", "test");
+
+}
+
+int	main(void)
+{
+	test_char();
+	test_string();
+	test_d();
+	test_i();
+	test_u();
+	test_p();
+	test_x();
+	test_upperx();
+	test_multiplo();
+	return (0);
+}
+
